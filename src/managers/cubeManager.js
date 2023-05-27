@@ -1,4 +1,4 @@
-
+const uniqid = require('uniqid')
 const cubes = [];
 
 exports.getAll = () => {
@@ -7,7 +7,7 @@ exports.getAll = () => {
 
 exports.create = (cubeData) => {
     const newCube = {
-        id:cubes.length + 1,
+        id: uniqid(),
         ...cubeData,
     }
     cubes.push(newCube);
