@@ -1,17 +1,9 @@
-const uniqid = require('uniqid')
-const cubes = [
-    {
-        id: '1ojxg1xp8li66ld8y',
-    name: 'test1',
-    description: 'very good cube for kids',
-    imageUrl: 'https://cdn.shopify.com/s/files/1/0482/9177/4628/products/o3rmamdfu2kartbxpul9.jpg?v=1681761411',
-    difficultyLevel: 3
-    }
-];
 
-exports.getAll = (search,from,to) => {
-  let result = cubes.slice();
+const Cube = require('../models/Cube');
 
+exports.getAll = async(search,from,to) => {
+  let result = await Cube.find().lean();
+//TODO:use mongoose to filter in db
   if(search){
     result =  result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()))
   }
@@ -26,16 +18,11 @@ exports.getAll = (search,from,to) => {
 
 };
 
-exports.getOne = (cubeId) => {
-return cubes.find(x => x.id == cubeId)
-};
+exports.getOne = (cubeId) => Cube.findById(cubeId);
 
-exports.create = (cubeData) => {
-    const newCube = {
-        id: uniqid(),
-        ...cubeData,
-    }
-    cubes.push(newCube);
+exports.create = async(cubeData) => {
+    const cube = new Cube(cubeData);
+    await cube.save()
     
-    return newCube;
+    return cube;
 };
