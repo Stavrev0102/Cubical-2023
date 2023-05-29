@@ -4,5 +4,5 @@
  async function dbConnect (){
     await mongoose.connect(uri)
  }
- 
+
  module.exports = dbConnect
