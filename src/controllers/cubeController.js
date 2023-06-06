@@ -4,7 +4,7 @@ const accessoryManager = require('../managers/accessoryManager');
 
 
 router.get('/create',(req,res) => {
-    console.log(req.user)
+
 res.render('create')
 });
 
@@ -19,6 +19,7 @@ const { name,
     description,
     imageUrl,
     difficultyLevel:Number(difficultyLevel),
+    owner:req.user._id,
 });
 
 
