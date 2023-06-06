@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
 
+//Register
 router.get('/register',(req,res) => {
 res.render('user/register')
 });
@@ -16,9 +17,12 @@ router.get('/login',(req,res) => {
     res.render('user/login');
 });
 
+//Login
 router.post('/login',async(req,res) => {
     const { username,password } = req.body;
-    await userManager.login(username,password);
+    const user = await userManager.login(username,password);
+    console.log(user)
+
     res.redirect('/')
 });
 
