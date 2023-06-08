@@ -6,11 +6,12 @@ const {isAuth } = require('../middlewares/authMiddleware')
 
 router.get('/:cubeId/details', async(req,res) => {
     const cube = await cubeManager.getOneWithAccessories(req.params.cubeId).lean();
+    const accessories = cube.accessories
     if(!cube){
         return res.redirect('/404')
     }
     const isOwner = cube.owner?.toString() === req.user?._id
-    res.render('cube/details',{ cube,isOwner })
+    res.render('cube/details',{ cube,isOwner,accessories})
     });
 
  

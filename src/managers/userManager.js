@@ -1,7 +1,6 @@
 
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const { use } = require('../controllers/userController');
 const jwt = require('../lib/jwb');
 
 const { SECRET } = require('../config/config')
